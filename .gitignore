@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Build files
+dist/
+build/
+
+# Local configuration
+.env
+.env.local
+
+# Chrome extension package
+*.crx
+*.pem
+
+# User-generated content
+*.zip

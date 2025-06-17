@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X to Bird</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>X to Bird</h1>
+    <p class="subtitle">Bring Back the Blue Bird!</p>
+    
+    <div class="setting">
+      <label class="switch">
+        <input type="checkbox" id="enabled">
+        <span class="slider"></span>
+      </label>
+      <span class="label">Enable Extension</span>
+    </div>
+    
+    <div class="setting">
+      <label class="switch">
+        <input type="checkbox" id="useClassicBird">
+        <span class="slider"></span>
+      </label>
+      <span class="label">Use Classic Blue Bird</span>
+    </div>
+    
+    <div class="setting">
+      <label class="switch">
+        <input type="checkbox" id="replaceFavicon">
+        <span class="slider"></span>
+      </label>
+      <span class="label">Replace Favicon</span>
+    </div>
+    
+    <div class="setting">
+      <label class="switch">
+        <input type="checkbox" id="replaceText">
+        <span class="slider"></span>
+      </label>
+      <span class="label">Replace "X" with "Twitter"</span>
+    </div>
+    
+    <div class="setting custom-logo-section" style="display: none;">
+      <label for="customLogoUrl">Custom Logo URL:</label>
+      <input type="url" id="customLogoUrl" placeholder="https://example.com/logo.png">
+      <small>Use a custom logo instead of the blue bird</small>
+    </div>
+    
+    <div class="setting custom-logo-section" style="display: none;">
+      <label for="logoFile">Or Upload Logo:</label>
+      <input type="file" id="logoFile" accept="image/*">
+      <small>Upload an image file</small>
+    </div>
+    
+    <div class="setting" id="customTextSection" style="display: none;">
+      <label for="customPageName">Replace "X" with:</label>
+      <input type="text" id="customPageName" placeholder="Twitter" value="Twitter">
+    </div>
+    
+    <div id="logoPreview" class="logo-preview"></div>
+    
+    <button id="saveButton" class="save-button">Save Settings</button>
+    
+    <div id="status" class="status"></div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

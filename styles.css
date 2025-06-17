@@ -1,0 +1,44 @@
+/* Content styles for X to Bird - Bring Back the Blue Bird */
+
+/* Ensure replaced bird logos maintain proper styling */
+img[data-bird-replaced="true"] {
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+/* Override X's logo styles if needed */
+[data-testid="Logo"] img,
+header img[src*="twitter-bird"] {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* Ensure bird logo is visible in all contexts */
+img[src*="twitter-bird.svg"] {
+  min-width: 20px;
+  min-height: 20px;
+}
+
+/* Fix for dark mode visibility */
+@media (prefers-color-scheme: dark) {
+  img[src*="twitter-bird.svg"] {
+    filter: brightness(1.2);
+  }
+}
+
+/* Smooth transitions for replaced elements */
+.bird-replaced {
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Custom highlight for replaced text (if enabled) */
+[data-text-replaced="true"] {
+  animation: bird-highlight 0.3s ease-in-out;
+}
+
+@keyframes bird-highlight {
+  0% { background-color: transparent; }
+  50% { background-color: rgba(29, 161, 242, 0.1); }
+  100% { background-color: transparent; }
+}
