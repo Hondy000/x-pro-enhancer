@@ -160,7 +160,6 @@ function replaceDocumentTitle() {
   }
 }
 
-
 // Observe DOM changes to handle dynamically loaded content
 function observeChanges() {
   // Observe for title changes

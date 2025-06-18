@@ -2,7 +2,9 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "webextensions": true
+    "webextensions": true,
+    "node": true,
+    "jest": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
@@ -12,6 +14,24 @@
   "globals": {
     "chrome": "readonly"
   },
+  "overrides": [
+    {
+      "files": ["**/__tests__/**/*.js", "**/*.test.js", "**/*.spec.js", "jest.*.js"],
+      "env": {
+        "jest": true,
+        "node": true
+      }
+    },
+    {
+      "files": ["scripts/**/*.js", "*.config.js", "__mocks__/**/*.js"],
+      "env": {
+        "node": true
+      },
+      "parserOptions": {
+        "sourceType": "script"
+      }
+    }
+  ],
   "rules": {
     "indent": ["error", 2],
     "linebreak-style": ["error", "unix"],
@@ -33,6 +53,7 @@
   "ignorePatterns": [
     "dist/",
     "node_modules/",
-    "*.min.js"
+    "*.min.js",
+    "coverage/"
   ]
 }

@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCustomSections();
   });
 
-
   function updateCustomSections() {
     const showCustomLogo = !useClassicBirdCheckbox.checked;
 
