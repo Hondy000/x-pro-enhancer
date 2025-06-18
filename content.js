@@ -5,34 +5,27 @@ const config = {
   enabled: true,
   useClassicBird: true,
   replaceFavicon: true,
-  replaceText: false,
   replaceUrl: false,
-  customLogoUrl: '',
-  customPageName: 'Twitter'
+  customLogoUrl: ''
 };
 
 // Default blue bird image (data URL)
 const DEFAULT_BIRD_SVG = chrome.runtime.getURL('images/twitter-bird.svg');
 
 // Load configuration from storage
-chrome.storage.sync.get(['enabled', 'useClassicBird', 'replaceFavicon', 'replaceText', 'replaceUrl', 'customLogoUrl', 'customPageName'], (result) => {
+chrome.storage.sync.get(['enabled', 'useClassicBird', 'replaceFavicon', 'replaceUrl', 'customLogoUrl'], (result) => {
   config.enabled = result.enabled !== false;
   config.useClassicBird = result.useClassicBird !== false;
   config.replaceFavicon = result.replaceFavicon !== false;
-  config.replaceText = result.replaceText === true; // false by default
   config.replaceUrl = result.replaceUrl === true; // false by default
   config.customLogoUrl = result.customLogoUrl || '';
-  config.customPageName = result.customPageName || 'Twitter';
-  
+
   if (config.enabled) {
     replaceLogo();
     replaceFavicon();
     replaceDocumentTitle(); // Always replace title
     if (config.replaceUrl) {
       replaceUrlDisplay();
-    }
-    if (config.replaceText) {
-      replacePageName();
     }
     observeChanges();
   }
@@ -56,35 +49,35 @@ function replaceLogo() {
     '.r-1cvl2hr.r-4qtqp9.r-yyyyoo.r-16y2uox.r-lwhw9o.r-dnmrzs.r-bnwqim.r-1plcrui.r-lrvibr',
     'h1[role="heading"] svg' // Mobile header logo
   ];
-  
-  logoSelectors.forEach(selector => {
+
+  logoSelectors.forEach((selector) => {
     const logos = document.querySelectorAll(selector);
-    logos.forEach(logo => {
+    logos.forEach((logo) => {
       // Skip if already replaced
       if (logo.dataset.birdReplaced === 'true') return;
-      
+
       // Get the logo source
       const logoUrl = config.useClassicBird ? DEFAULT_BIRD_SVG : (config.customLogoUrl || DEFAULT_BIRD_SVG);
-      
+
       // Replace with bird image
       const img = document.createElement('img');
       img.src = logoUrl;
       img.className = logo.className || '';
-      
+
       // Preserve original size
       const rect = logo.getBoundingClientRect();
       img.style.width = rect.width + 'px' || '32px';
       img.style.height = rect.height + 'px' || '32px';
       img.style.objectFit = 'contain';
-      
+
       // Mark as replaced
       img.dataset.birdReplaced = 'true';
-      
+
       // Handle error
       img.onerror = function() {
         this.style.display = 'none';
       };
-      
+
       if (logo.parentNode) {
         logo.parentNode.replaceChild(img, logo);
       }
@@ -95,20 +88,20 @@ function replaceLogo() {
 // Function to replace favicons
 function replaceFavicon() {
   if (!config.replaceFavicon) return;
-  
+
   const faviconUrl = config.useClassicBird ? DEFAULT_BIRD_SVG : (config.customLogoUrl || DEFAULT_BIRD_SVG);
-  
+
   // Remove existing favicons
   const existingIcons = document.querySelectorAll('link[rel*="icon"]');
-  existingIcons.forEach(icon => icon.remove());
-  
+  existingIcons.forEach((icon) => icon.remove());
+
   // Add new favicon
   const newIcon = document.createElement('link');
   newIcon.rel = 'icon';
   newIcon.type = 'image/svg+xml';
   newIcon.href = faviconUrl;
   document.head.appendChild(newIcon);
-  
+
   // Also add as shortcut icon for compatibility
   const shortcutIcon = document.createElement('link');
   shortcutIcon.rel = 'shortcut icon';
@@ -142,7 +135,7 @@ function replaceUrlDisplay() {
       setTimeout(() => info.remove(), 300);
     };
     document.body.appendChild(info);
-    
+
     // Auto-hide after 5 seconds
     setTimeout(() => {
       if (info.parentNode) {
@@ -155,47 +148,18 @@ function replaceUrlDisplay() {
 
 // Function to replace document title only
 function replaceDocumentTitle() {
-  // Replace "X Pro" or "X" in title with custom name
+  // Replace "X Pro" or "X" in title with "Twitter"
   if (document.title.includes('X Pro')) {
-    document.title = document.title.replace(/X Pro/g, config.customPageName + ' Pro');
+    document.title = document.title.replace(/X Pro/g, 'Twitter Pro');
   } else if (document.title.includes('X / ')) {
-    document.title = document.title.replace(/X \/ /g, config.customPageName + ' / ');
+    document.title = document.title.replace(/X \/ /g, 'Twitter / ');
   } else if (document.title.includes(' / X')) {
-    document.title = document.title.replace(/ \/ X/g, ' / ' + config.customPageName);
+    document.title = document.title.replace(/ \/ X/g, ' / Twitter');
   } else if (document.title.includes('X')) {
-    document.title = document.title.replace(/\bX\b/g, config.customPageName);
+    document.title = document.title.replace(/\bX\b/g, 'Twitter');
   }
 }
 
-// Function to replace page names/titles
-function replacePageName() {
-  // This function now only handles text content in the page, not the title
-  
-  // Update text nodes containing X
-  const textSelectors = [
-    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-    'span', 'div', 'p', 'a', 'title'
-  ];
-  
-  textSelectors.forEach(selector => {
-    const elements = document.querySelectorAll(selector);
-    elements.forEach(element => {
-      // Skip if already processed
-      if (element.dataset.textReplaced === 'true') return;
-      
-      if (element.textContent && element.textContent.includes('X') && !element.textContent.includes('Twitter')) {
-        // Only replace text nodes to avoid breaking HTML
-        for (let node of element.childNodes) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            // Replace standalone X (not part of other words)
-            node.textContent = node.textContent.replace(/\bX\b/g, config.customPageName);
-          }
-        }
-        element.dataset.textReplaced = 'true';
-      }
-    });
-  });
-}
 
 // Observe DOM changes to handle dynamically loaded content
 function observeChanges() {
@@ -203,7 +167,7 @@ function observeChanges() {
   const titleObserver = new MutationObserver(() => {
     replaceDocumentTitle();
   });
-  
+
   const titleElement = document.querySelector('title');
   if (titleElement) {
     titleObserver.observe(titleElement, {
@@ -212,12 +176,12 @@ function observeChanges() {
       subtree: true
     });
   }
-  
+
   // Observe for favicon changes in head
   const headObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.type === 'childList') {
-        mutation.addedNodes.forEach(node => {
+        mutation.addedNodes.forEach((node) => {
           if (node.nodeName === 'LINK' && node.rel && node.rel.includes('icon')) {
             replaceFavicon();
           } else if (node.nodeName === 'TITLE') {
@@ -233,14 +197,14 @@ function observeChanges() {
       }
     });
   });
-  
+
   if (document.head) {
     headObserver.observe(document.head, {
       childList: true,
       subtree: true
     });
   }
-  
+
   // Observe for logo changes in body
   const bodyObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
@@ -250,14 +214,11 @@ function observeChanges() {
         window.logoReplacerTimeout = setTimeout(() => {
           replaceLogo();
           replaceDocumentTitle(); // Always check title
-          if (config.replaceText) {
-            replacePageName();
-          }
         }, 100);
       }
     });
   });
-  
+
   if (document.body) {
     bodyObserver.observe(document.body, {
       childList: true,
@@ -287,21 +248,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     config.enabled = request.enabled !== false;
     config.useClassicBird = request.useClassicBird !== false;
     config.replaceFavicon = request.replaceFavicon !== false;
-    config.replaceText = request.replaceText === true;
     config.customLogoUrl = request.customLogoUrl || '';
-    config.customPageName = request.customPageName || 'Twitter';
-    
+
     if (config.enabled) {
       replaceLogo();
       replaceFavicon();
       replaceDocumentTitle(); // Always replace title
-      if (config.replaceText) {
-        replacePageName();
-      }
     } else {
       // Reload page to restore original content
       location.reload();
     }
-    sendResponse({success: true});
+    sendResponse({ success: true });
   }
 });

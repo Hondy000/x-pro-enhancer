@@ -1,0 +1,22 @@
+{
+  "name": "x-to-bird",
+  "version": "1.0.0",
+  "description": "Bring back the classic Twitter blue bird - Replace X logos with the beloved blue bird",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "build": "node scripts/build.js",
+    "package": "npm run lint && npm run build",
+    "clean": "rm -rf dist *.zip"
+  },
+  "devDependencies": {
+    "archiver": "^5.3.1",
+    "eslint": "^8.45.0"
+  },
+  "author": "nagomin",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nagomin/x-to-bird"
+  }
+}

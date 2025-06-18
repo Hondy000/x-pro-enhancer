@@ -13,15 +13,15 @@ chrome.runtime.onInstalled.addListener(() => {
       customPageName: 'Twitter',
       customLogoUrl: ''
     };
-    
+
     // Only set values that are undefined
     const toSet = {};
-    Object.keys(defaults).forEach(key => {
+    Object.keys(defaults).forEach((key) => {
       if (result[key] === undefined) {
         toSet[key] = defaults[key];
       }
     });
-    
+
     if (Object.keys(toSet).length > 0) {
       chrome.storage.sync.set(toSet);
     }
@@ -38,7 +38,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     }
   }
 });
-
 
 // Listen for messages from content script
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
