@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## プロジェクト概要
 
-X（旧Twitter）のロゴを青い鳥（Twitter Bird）に戻すChrome拡張機能。X.com全体で「X」ロゴを懐かしい青い鳥に置換し、ドキュメントタイトルも自動的に「Twitter」に変更します。
+X Pro Enhancer - X Proのユーザーエクスペリエンスを向上させるChrome拡張機能。クラシックTwitter鳥ロゴの復元から始まり、カラム管理やカスタムCSSなど、パワーユーザー向けの機能を提供します。
 
 ## 開発コマンド
 
@@ -15,7 +15,7 @@ npm run lint
 # リント自動修正
 npm run lint:fix
 
-# Chrome Web Store用パッケージ作成（dist/x-to-bird-v{version}.zip）
+# Chrome Web Store用パッケージ作成（dist/x-pro-enhancer-v{version}.zip）
 npm run package
 
 # ビルドのみ実行
@@ -137,13 +137,15 @@ chrome://extensions/ → 「Service Worker」リンクをクリック
 npm run package
 
 # 3. 生成されたZIPファイルを確認
-ls -la dist/x-to-bird-v*.zip
+ls -la dist/x-pro-enhancer-v*.zip
 
 # 4. Chrome Web Storeにアップロード
 ```
 
 ## 最近の変更点
 
+- プロジェクト名を「X Pro Enhancer」に変更
+- 今後の機能拡張（カラム管理、カスタムCSS）を考慮した説明に更新
 - テキスト置換機能を削除（ドキュメントタイトルの置換は常時有効）
 - 設定オプションを簡素化
 - パフォーマンス最適化の強化

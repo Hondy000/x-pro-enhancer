@@ -159,7 +159,7 @@ describe('build.js', () => {
           expect.stringContaining('✅ Build complete')
         );
         expect(console.log).toHaveBeenCalledWith(
-          expect.stringContaining('x-to-bird-v1.0.0.zip')
+          expect.stringContaining('x-pro-enhancer-v1.0.0.zip')
         );
         done();
       }, 10);

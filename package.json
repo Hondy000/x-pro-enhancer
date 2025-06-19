@@ -1,7 +1,7 @@
 {
-  "name": "x-to-bird",
+  "name": "x-pro-enhancer",
   "version": "1.0.0",
-  "description": "Bring back the classic Twitter blue bird - Replace X logos with the beloved blue bird",
+  "description": "Enhance your X Pro experience with custom features including classic Twitter bird logo, column management, and custom CSS",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
@@ -27,6 +27,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nagomin/x-to-bird"
+    "url": "https://github.com/nagomin/x-pro-enhancer"
   }
 }

@@ -20,15 +20,15 @@ describe('content.js', () => {
   beforeEach(() => {
     // Clear module cache
     jest.resetModules();
-    
+
     // Reset DOM
     document.body.innerHTML = '';
     document.head.innerHTML = '';
     document.title = '';
-    
+
     // Reset mocks
     jest.clearAllMocks();
-    
+
     // Mock config
     mockConfig = {
       enabled: true,
@@ -46,7 +46,7 @@ describe('content.js', () => {
     // Clear any timeouts
     jest.clearAllTimers();
     jest.useFakeTimers();
-    
+
     // Store original location
     originalLocation = window.location;
   });
@@ -70,7 +70,7 @@ describe('content.js', () => {
 
       // Load content script
       require('../content.js');
-      
+
       // Run timers to execute debounced functions
       jest.runAllTimers();
 
@@ -164,9 +164,9 @@ describe('content.js', () => {
 
       const newFavicons = document.querySelectorAll('link[rel*="icon"]');
       expect(newFavicons.length).toBeGreaterThan(0);
-      
+
       // Check at least one has the bird icon
-      const birdFavicon = Array.from(newFavicons).find(f => f.href.includes('twitter-bird.svg'));
+      const birdFavicon = Array.from(newFavicons).find((f) => f.href.includes('twitter-bird.svg'));
       expect(birdFavicon).toBeTruthy();
     });
 
@@ -224,7 +224,7 @@ describe('content.js', () => {
   describe('MutationObserver Setup', () => {
     it('should set up observers for dynamic content', () => {
       require('../content.js');
-      
+
       // Should create MutationObserver instances
       expect(global.MutationObserver).toHaveBeenCalled();
       expect(mockObserve).toHaveBeenCalled();

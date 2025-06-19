@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "X to Bird - Bring Back the Blue Bird",
+  "name": "X Pro Enhancer",
   "version": "1.0.0",
-  "description": "Replace the X logo with the classic Twitter blue bird. Tired of the big X? Bring back the familiar blue bird!",
+  "description": "Enhance your X Pro experience with custom features including classic Twitter bird logo, column management, and custom CSS",
   "permissions": [
     "storage",
     "tabs"

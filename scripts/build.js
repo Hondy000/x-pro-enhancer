@@ -19,7 +19,7 @@ const INCLUDE_FILES = [
 ];
 
 async function build() {
-  console.log('🔨 Building X to Bird extension...');
+  console.log('🔨 Building X Pro Enhancer extension...');
 
   // distディレクトリを作成
   const distDir = path.join(__dirname, '..', 'dist');
@@ -34,7 +34,7 @@ async function build() {
   const version = manifest.version;
 
   // ZIPファイル名
-  const zipFileName = `x-to-bird-v${version}.zip`;
+  const zipFileName = `x-pro-enhancer-v${version}.zip`;
   const zipPath = path.join(distDir, zipFileName);
 
   // ZIPアーカイブを作成

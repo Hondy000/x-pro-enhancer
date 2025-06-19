@@ -1,17 +1,19 @@
-# X to Bird - Bring Back the Blue Bird
+# X Pro Enhancer
 
 *Read this in other languages: [日本語](README.ja.md)*
 
-A Chrome extension that replaces the X logo with the classic Twitter blue bird. Tired of the big "X"? Bring back the familiar blue bird that millions of users love!
+Enhance your X Pro experience with custom features including the classic Twitter bird logo, column management, and custom CSS styling. Take control of your X Pro interface!
 
 ## Features
 
 - 🐦 Replace all X logos with the classic Twitter blue bird
 - 🔖 Replace the favicon with the blue bird icon
-- 📝 Optionally replace "X" text with "Twitter" throughout the site
+- 📝 Automatically replace "X" with "Twitter" in document titles
 - 🎨 Support for custom logos if you prefer something different
 - ⚡ Real-time updates without page reload
-- 🌐 Works on all X.com/Twitter.com domains
+- 🌐 Works on all X.com/Twitter.com domains including X Pro
+- 📊 **Coming Soon**: Column management for X Pro
+- 🎨 **Coming Soon**: Custom CSS injection
 
 ## Installation
 
@@ -28,8 +30,9 @@ A Chrome extension that replaces the X logo with the classic Twitter blue bird. 
    - **Enable Extension**: Turn the extension on/off
    - **Use Classic Blue Bird**: Use the classic Twitter bird logo (recommended)
    - **Replace Favicon**: Replace the browser tab icon
-   - **Replace "X" with "Twitter"**: Change text throughout the site
 3. Click "Save Settings" to apply changes
+
+Note: Document title replacement ("X" → "Twitter") is always active when the extension is enabled.
 
 ## Custom Logo
 
@@ -50,7 +53,7 @@ This extension:
 
 ## Why This Extension?
 
-Many users miss the iconic Twitter blue bird that represented the platform for over a decade. This extension brings back that familiar, friendly logo that millions of users associate with the platform.
+X Pro Enhancer is designed to give users more control over their X Pro experience. Starting with the beloved blue bird logo restoration, we're building a comprehensive suite of enhancement features for power users.
 
 ## License
 
@@ -90,9 +93,24 @@ x-pro-logo-extension/
 
 ### Testing
 1. Load the extension in developer mode
-2. Visit X.com or Twitter.com
+2. Visit X.com, Twitter.com, or pro.x.com
 3. Test all toggle options
 4. Check that settings persist after browser restart
+
+### Development Commands
+```bash
+# Run linting
+npm run lint
+
+# Auto-fix linting issues
+npm run lint:fix
+
+# Create Chrome Web Store package
+npm run package
+
+# Run tests
+npm test
+```
 
 ## Contributing
 
@@ -106,6 +124,16 @@ If you encounter any issues:
 3. Check that you're on X.com or Twitter.com
 4. Report issues on the GitHub repository
 
+## Roadmap
+
+- ✅ Classic Twitter bird logo replacement
+- ✅ Favicon replacement
+- ✅ Document title replacement
+- 🚧 Column folding/management for X Pro
+- 🚧 Custom CSS injection
+- 🚧 Theme presets
+- 🚧 Export/import settings
+
 ---
 
-Made with ❤️ for everyone who misses the blue bird
+Made with ❤️ for X Pro power users
