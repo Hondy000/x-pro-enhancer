@@ -27,8 +27,6 @@ describe('background.js', () => {
           enabled: true,
           useClassicBird: true,
           replaceFavicon: true,
-          replaceText: false,
-          replaceUrl: false,
           customPageName: 'Twitter',
           customLogoUrl: ''
         });
@@ -54,8 +52,6 @@ describe('background.js', () => {
         // Should only set the missing values
         expect(chrome.storage.sync.set).toHaveBeenCalledWith({
           replaceFavicon: true,
-          replaceText: false,
-          replaceUrl: false,
           customPageName: 'Twitter',
           customLogoUrl: ''
         });
@@ -70,8 +66,6 @@ describe('background.js', () => {
           enabled: true,
           useClassicBird: true,
           replaceFavicon: true,
-          replaceText: false,
-          replaceUrl: false,
           customPageName: 'Twitter',
           customLogoUrl: ''
         });

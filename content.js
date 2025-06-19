@@ -5,7 +5,6 @@ const config = {
   enabled: true,
   useClassicBird: true,
   replaceFavicon: true,
-  replaceUrl: false,
   customLogoUrl: ''
 };
 
@@ -13,20 +12,16 @@ const config = {
 const DEFAULT_BIRD_SVG = chrome.runtime.getURL('images/twitter-bird.svg');
 
 // Load configuration from storage
-chrome.storage.sync.get(['enabled', 'useClassicBird', 'replaceFavicon', 'replaceUrl', 'customLogoUrl'], (result) => {
+chrome.storage.sync.get(['enabled', 'useClassicBird', 'replaceFavicon', 'customLogoUrl'], (result) => {
   config.enabled = result.enabled !== false;
   config.useClassicBird = result.useClassicBird !== false;
   config.replaceFavicon = result.replaceFavicon !== false;
-  config.replaceUrl = result.replaceUrl === true; // false by default
   config.customLogoUrl = result.customLogoUrl || '';
 
   if (config.enabled) {
     replaceLogo();
     replaceFavicon();
     replaceDocumentTitle(); // Always replace title
-    if (config.replaceUrl) {
-      replaceUrlDisplay();
-    }
     observeChanges();
   }
 });
@@ -107,43 +102,6 @@ function replaceFavicon() {
   shortcutIcon.rel = 'shortcut icon';
   shortcutIcon.href = faviconUrl;
   document.head.appendChild(shortcutIcon);
-}
-
-// Function to show URL replacement info
-function replaceUrlDisplay() {
-  // Note: Actually changing the URL can break the page functionality
-  // Instead, we'll show a subtle notification about the classic domain
-  if (window.location.hostname.includes('x.com') && !document.querySelector('#classic-domain-info')) {
-    const info = document.createElement('div');
-    info.id = 'classic-domain-info';
-    info.style.cssText = `
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(29, 155, 240, 0.9);
-      color: white;
-      padding: 10px 15px;
-      border-radius: 20px;
-      font-size: 12px;
-      z-index: 9999;
-      cursor: pointer;
-      transition: opacity 0.3s;
-    `;
-    info.textContent = '🐦 Classic Twitter domain: ' + window.location.href.replace(/x\.com/g, 'twitter.com');
-    info.onclick = () => {
-      info.style.opacity = '0';
-      setTimeout(() => info.remove(), 300);
-    };
-    document.body.appendChild(info);
-
-    // Auto-hide after 5 seconds
-    setTimeout(() => {
-      if (info.parentNode) {
-        info.style.opacity = '0';
-        setTimeout(() => info.remove(), 300);
-      }
-    }, 5000);
-  }
 }
 
 // Function to replace document title only
