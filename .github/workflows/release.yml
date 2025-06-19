@@ -12,10 +12,10 @@ jobs:
       contents: write
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Use Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '20.x'
         cache: 'npm'
@@ -36,12 +36,9 @@ jobs:
         echo "VERSION_NUMBER=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
     
     - name: Create Release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v2
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ steps.get_version.outputs.VERSION }}
+        name: Release ${{ steps.get_version.outputs.VERSION }}
         body: |
           Chrome拡張機能 X to Bird ${{ steps.get_version.outputs.VERSION }}
           
@@ -56,12 +53,4 @@ jobs:
         draft: false
         prerelease: false
     
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/x-to-bird-v${{ steps.get_version.outputs.VERSION_NUMBER }}.zip
-        asset_name: x-to-bird-v${{ steps.get_version.outputs.VERSION_NUMBER }}.zip
-        asset_content_type: application/zip
+        files: ./dist/x-to-bird-v${{ steps.get_version.outputs.VERSION_NUMBER }}.zip
