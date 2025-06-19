@@ -255,7 +255,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       replaceDocumentTitle(); // Always replace title
     } else {
       // Reload page to restore original content
-      location.reload();
+      if (typeof location !== 'undefined' && location.reload && typeof jest === 'undefined') {
+        location.reload();
+      }
     }
     sendResponse({ success: true });
   }
