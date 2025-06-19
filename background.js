@@ -3,13 +3,11 @@
 // Initialize extension on install
 chrome.runtime.onInstalled.addListener(() => {
   // Set default values
-  chrome.storage.sync.get(['enabled', 'useClassicBird', 'replaceFavicon', 'replaceText', 'customPageName', 'customLogoUrl'], (result) => {
+  chrome.storage.sync.get(['enabled', 'useClassicBird', 'replaceFavicon', 'customPageName', 'customLogoUrl'], (result) => {
     const defaults = {
       enabled: true,
       useClassicBird: true,
       replaceFavicon: true,
-      replaceText: false,
-      replaceUrl: false,
       customPageName: 'Twitter',
       customLogoUrl: ''
     };
