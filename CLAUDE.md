@@ -6,6 +6,27 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 X Pro Enhancer - X Proのユーザーエクスペリエンスを向上させるChrome拡張機能。クラシックTwitter鳥ロゴの復元から始まり、カラム管理やカスタムCSSなど、パワーユーザー向けの機能を提供します。
 
+## 重要: コミット前チェックリスト
+
+**必ず以下のコマンドを実行して問題がないことを確認してからコミットしてください：**
+
+```bash
+# 1. リントチェック
+npm run lint
+
+# 2. テスト実行
+npm test
+
+# 3. ビルド確認
+npm run build
+
+# すべて問題なければコミット
+git add .
+git commit -m "your commit message"
+```
+
+エラーが発生した場合は、必ず修正してから再度チェックを行ってください。
+
 ## 開発コマンド
 
 ```bash
